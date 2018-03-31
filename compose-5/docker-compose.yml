@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  drupal: 
+    build: .
+    image: custom-drupal:latest
+    ports:
+    - 8888:80
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-themes:/var/www/html/themes
+      - drupal-sites:/var/www/html/sites
+    restart: always
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_PASSWORD=olakease
+    volumes:
+      - drupal-data:/var/lib/postgresql/data
+    restart: always
+volumes:
+  drupal-data:
+  drupal-modules: 
+  drupal-profiles:
+  drupal-themes:
+  drupal-sites:

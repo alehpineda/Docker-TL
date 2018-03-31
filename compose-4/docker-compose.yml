@@ -1,0 +1,20 @@
+version: '2' 
+
+services:  
+  drupal: 
+    image: drupal:latest 
+    ports:
+    - 8080:80 
+    volumes: 
+      - /var/www/html/modules
+      - /var/www/html/profiles
+      - /var/www/html/themes
+      - /var/www/html/sites
+    restart: always
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=TalentLand
+    restart: always

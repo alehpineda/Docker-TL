@@ -1,0 +1,13 @@
+version: '3.1' # Si no se especifica una version, se asume v1. Se recomienda v2 minimo.
+
+services:  # Contenedores. Similar a docker container run
+  servicename: # Nombre amigable. Este sera el nombre DNS para la red interna.
+    image: # Opcional, si construyes tu imagen.
+    command: # Opcional, remplaza el CMD default de la imagen.
+    environment: # Opcional, igual que -e en docker container run.
+    volumes: # Opcional, igual a -v en docker container run
+  servicename2: # Otro servicio
+
+volumes: # Opcional, igual a docker volume create
+
+networks: # Opcional, igual a docker network create
