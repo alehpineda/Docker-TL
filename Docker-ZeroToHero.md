@@ -225,3 +225,82 @@ docker-compose logs
 # Muestra los logs del compose.
 ```
 
+## Introduccion a Swarm y crear un cluster de 3 nodos.
+
+### Docker Swarm
+
+```bash
+docker swarm init 
+# Iniciar swarm
+
+docker info 
+# Checar status del swarm
+
+docker node ls 
+# Lista los nodos dentro del swarm
+
+docker node update --help 
+# Opciones para actualizar los nodos del swarm
+
+docker node update --role manager <nombredelnodo> 
+# Cambiar rol del nodo a manager
+
+docker service create 
+# Iniciar nuevo servicio en swarm
+
+docker service ls 
+# Listar servicios en swarm
+
+docker service ps <nombreservicio> 
+# Listar servicios en swarm similar a ps
+
+docker service update <nombreservicio> --replicas 3 
+# Actualizar el servicio con 3 replicas.
+
+docker update --help 
+# opciones para actualizar un contenedor
+
+docker swarm update --help 
+# Opciones para actualizar el swarm
+
+docker service rm <nombreservicio> 
+# Remover el servicio
+
+docker network create --driver overlay <nombrered> 
+# Crear red interna para servicios del swarm. Un servicio puede estar en varias redes.
+
+docker service create --name psql --network mydrupal -e POSTGRES_PASSWORD=mypass postgres 
+# Crear un servicio llamado psql en la red mydrupal con contraseña mypass de la imagen postgres
+
+docker service create --name drupal --network mydrupal -p 80:80 drupal 
+# Crear un servicio llamado drupal en la red mydrupal con el puerto 80 abierto en el host de la imagen drupal
+
+docker service create --name search --replicas 3 -p 9200:9200 elasticsearch:2 
+# Crear un servicio llamado search con 3 replicas con el puerto 9200 de la imagen elasticsearch:2
+```
+
+## Caracteristicas basicas de Swarm y como usarlas en tu flujo de trabajo.
+
+### Docker swarm complete app
+
+```bash
+docker network create --driver overlay backend
+docker network create --driver overlay frontend
+# Crear dos redes overlay backend y frontend 
+
+docker service create --name vote --network frontend -p 80:80 --replicas 3 dockersamples/examplevotingapp_vote:before
+# Crear un servicio vote con tres replicas unido a la red frontend saliendo por el puerto 80.
+
+docker service create --name redis --network frontend --replicas 2 redis:3.2
+# Crear un servicio redis unido a la red frontend con dos replicas.
+
+docker service create --name db --mount type=volume,source=db-data,target=/var/lib/postgresql/data --network backend postgres:9.4
+# Crear un servicio llamado db con volumen unido a la red backend.
+
+
+docker service create --name worker --network frontend --network backend dockersamples/examplevotingapp_worker
+# Crear un servicio worker unido a la red frontend y backend.
+
+docker service create --name result -p 5000:80 --network backend dockersamples/examplevotingapp_result:before
+# Crear un servicio result saliendo en el puerto 5000 unido a la red backend.
+```
