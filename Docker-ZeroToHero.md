@@ -106,7 +106,7 @@ docker container run -d --network mi_red --name nuevo_nginx -p 8080:80 nginx
 docker container run -d --network my_app_net --network mi_red --name nuevo_apache -p 8888:80 apache
 # Iniciar nuevo contenedor apache llamado nuevo_apache en la red mi_red y my_app_net. Previamente creadas las redes.
 
-docker container prune
+docker network prune
 # Eliminar todas las redes que no esten unidas a contenedores
 ```
 
@@ -158,9 +158,9 @@ docker pull <usuarioDockerHub>/nginx_html:latest
 # Descargar imagen
 ```
 
-## Volumenes. La vida del contenedor y como persistir datos.
+## Volumenes. 
 
-### Volumenes
+### La vida del contenedor y como persistir datos.
 
 Existen tres tipos de volumenes
 
@@ -209,7 +209,7 @@ docker logs -f postgres9.6.2
 
 ## Docker Compose, la herramienta de multi-contenedores.
 
-### Docker Compose
+### docker-compose
 
 ```bash 
 docker-compose up 
@@ -218,7 +218,7 @@ docker-compose up
 docker-compose down
 # Tira el servicio compose.
 
-docker-compose -f <archivoCompose> up -d
+docker-compose -f <archivoCompose.yml> up -d
 # Elige el archivo compose a utilizar
 
 docker-compose logs
