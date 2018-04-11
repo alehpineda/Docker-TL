@@ -1,7 +1,8 @@
 # Docker - Zero to Hero
 
-## By M. C. Alejandro H. Pineda 
-### From CIINN - Centro de Innovacion Acelerada A. C. and Coders Link.
+## By M. C. Alejandro H. Pineda
+
+### From CIINN - Centro de Innovacion Acelerada A. C. and Coders Link
 
 ## Docker Setup
 
@@ -21,7 +22,7 @@ Se requiere registro [previo](https://hub.docker.com)
 
 [Tu mejor aliado](https://docs.docker.com)
 
-### Checar instalacion y hola mundo.
+### Checar instalacion y hola mundo
 
 ```bash
 # Muestra info sobre la instalacion docker
@@ -33,7 +34,7 @@ docker container run hello-world
 ## Crear y usar contenedores "Like a Boss"
 
 ```bash
-docker container run nginx 
+docker container run nginx
 # corre nuevo contenedor nginx
 
 docker container run -d httpd
@@ -46,19 +47,19 @@ docker ps
 docker container ps
 # Muestra el listado de los contenedores corriendo.
 
-docker container stop <nombre del contenedor> 
+docker container stop <nombre del contenedor>
 # detiene contenedor usando id o nombre
 
-docker container start <nombre del contenedor> 
+docker container start <nombre del contenedor>
 # Inicia un contenedor usando id o nombre previamente detenido
 
-docker container rm <id del contenedor> 
+docker container rm <id del contenedor>
 # remueve/elimina contenedor usando id o nombre
 
-docker container run -p 8080:80 --name apache -d httpd 
+docker container run -p 8080:80 --name apache -d httpd
 # Correr nuevo contenedor httpd con nombre "apache" en detach en el puerto 8080 del host
 
-docker container run -p 8888:80 --name nginx -d nginx 
+docker container run -p 8888:80 --name nginx -d nginx
 # Correr nuevo contenedor nginx con nombre "nginx" en detach en el puerto 8080 del host
 
 docker logs apache
@@ -70,22 +71,22 @@ docker top nginx
 docker pull python
 # Descarga imagen python, default latest
 
-docker container run -it --name proxy nginx bash 
+docker container run -it --name proxy nginx bash
 # Iniciar nuevo contenedor nginx con nombre proxy de manera interactiva con terminal e inicialice bash.
 
-docker container run -it --name ubuntu ubuntu 
+docker container run -it --name ubuntu ubuntu
 # Iniciar nuevo contenedor ubuntu con nombre ubuntu de manera interactiva
 
-docker container start -ai ubuntu 
+docker container start -ai ubuntu
 # Reinicia contenedor interactivo de ubuntu
 
-docker container exec -it nginx bash 
+docker container exec -it nginx bash
 # Exec corre un proceso extra al contenedor previamente creado y corriendo. Contenedor interactivo de nginx con bash.
 
 docker container port nginx
 # Muestra los puertos del contenedor llamado "nginx"
 
-docker network ls 
+docker network ls
 # listar redes
 
 docker network inspect <nombre de red>
@@ -123,13 +124,13 @@ docker pull <nombre de la imagen>:<version>
 docker images
 # Lista todas las imagenes instaladas
 
-docker history nginx 
+docker history nginx
 # Checar la historia de la imagen nginx
 
-docker image inspect nginx 
+docker image inspect nginx
 # Checar metadatos de la imagen nginx
 
-docker image build -t customnginx . 
+docker image build -t customnginx .
 # Construir imagen llamada customnginx usando el Dockerfile de la carpeta dockerfile-1
 
 docker rmi <nombre imagen>
@@ -139,28 +140,28 @@ docker rmi <nombre imagen>
 ### Construir una imagen
 
 ```bash
-docker image build -t nginx_html . 
+docker image build -t nginx_html .
 # Construir image llamada nginx_html usando el Dockerfile del archivo. dockerfile-2
 
 docker container run -d -p 80:80 --name mi_pagina nginx_html
 # Correr un contenedor nginx_html en modo detach con puertos 80 y nombre mi_pagina 
 
-docker image tag nginx_html:latest deathscythe/nginx_html:latest 
+docker image tag nginx_html:latest deathscythe/nginx_html:latest
 # Taguear imagen con mi login de docker hub para despues empujarla.
 
-docker push <usuarioDockerHub>/nginx_html:latest 
+docker push <usuarioDockerHub>/nginx_html:latest
 # Empujar imagen nginx_html:latest a mi repositorio en docker hub. Preguntara por credenciales.
 
-docker rmi <usuarioDockerHub>/nginx_html:latest 
+docker rmi <usuarioDockerHub>/nginx_html:latest
 # Eliminar imagen
 
-docker pull <usuarioDockerHub>/nginx_html:latest 
+docker pull <usuarioDockerHub>/nginx_html:latest
 # Descargar imagen
 ```
 
-## Volumenes. 
+## Volumenes
 
-### La vida del contenedor y como persistir datos.
+### La vida del contenedor y como persistir datos
 
 Existen tres tipos de volumenes
 
@@ -172,10 +173,10 @@ Existen tres tipos de volumenes
   - tiene direccion dentro del host que esta reflejada en la imagen. Cambios hechos en el host se hacen en la imagen.
 
 ```bash
-docker volume prune 
+docker volume prune
 # Eliminar volumenes no ligados a un contenedor
 
-docker volume ls 
+docker volume ls
 # Listar los volumenes
 
 docker volume create <nombre del volumen>
@@ -184,7 +185,7 @@ docker volume create <nombre del volumen>
 docker volume inspect <nombre del volumen>
 # inspeccionar los volumenes
 
-docker container run -d --name mysqltest -e MYSQL_ALLOW_EMPTY_PASSWORD=Yes -v mysql-db:/var/lib/mysql mysql 
+docker container run -d --name mysqltest -e MYSQL_ALLOW_EMPTY_PASSWORD=Yes -v mysql-db:/var/lib/mysql mysql
 # Iniciar nuevo contenedor de mysql con nombre mysqltest y variable MYSQL_ALLOW_EMPTY_PASSWORD=Yes y volumen llamado mysql-db ligado a /var/lib/mysql.
 
 docker container run -d --name postgres9.6.1 -v psql-data:/var/lib/postgresql/data postgres:9.6.1
@@ -199,10 +200,10 @@ docker container run -d --name postgres9.6.2 -v psql-data:/var/lib/postgresql/da
 docker logs postgres9.6.2
 # Ver los logs del contenedor
 
-docker logs -f postgres9.6.1 
+docker logs -f postgres9.6.1
 # Follow -f para seguir los logs
 
-docker logs -f postgres9.6.2 
+docker logs -f postgres9.6.2
 # Follow -f para seguir los logs
 
 ```
@@ -211,8 +212,8 @@ docker logs -f postgres9.6.2
 
 ### docker-compose
 
-```bash 
-docker-compose up 
+```bash
+docker-compose up
 # Inicia el servicio compose, tiene que existir un archivo docker-compose.yml
 
 docker-compose down
@@ -230,63 +231,63 @@ docker-compose logs
 ### Docker Swarm
 
 ```bash
-docker swarm init 
+docker swarm init
 # Iniciar swarm
 
-docker info 
+docker info
 # Checar status del swarm
 
-docker node ls 
+docker node ls
 # Lista los nodos dentro del swarm
 
-docker node update --help 
+docker node update --help
 # Opciones para actualizar los nodos del swarm
 
-docker node update --role manager <nombredelnodo> 
+docker node update --role manager <nombredelnodo>
 # Cambiar rol del nodo a manager
 
-docker service create 
+docker service create
 # Iniciar nuevo servicio en swarm
 
-docker service ls 
+docker service ls
 # Listar servicios en swarm
 
-docker service ps <nombreservicio> 
+docker service ps <nombreservicio>
 # Listar servicios en swarm similar a ps
 
-docker service update <nombreservicio> --replicas 3 
+docker service update <nombreservicio> --replicas 3
 # Actualizar el servicio con 3 replicas.
 
-docker update --help 
+docker update --help
 # opciones para actualizar un contenedor
 
-docker swarm update --help 
+docker swarm update --help
 # Opciones para actualizar el swarm
 
-docker service rm <nombreservicio> 
+docker service rm <nombreservicio>
 # Remover el servicio
 
-docker network create --driver overlay <nombrered> 
+docker network create --driver overlay <nombrered>
 # Crear red interna para servicios del swarm. Un servicio puede estar en varias redes.
 
 docker service create --name psql --network mydrupal -e POSTGRES_PASSWORD=mypass postgres 
 # Crear un servicio llamado psql en la red mydrupal con contraseña mypass de la imagen postgres
 
-docker service create --name drupal --network mydrupal -p 80:80 drupal 
+docker service create --name drupal --network mydrupal -p 80:80 drupal
 # Crear un servicio llamado drupal en la red mydrupal con el puerto 80 abierto en el host de la imagen drupal
 
-docker service create --name search --replicas 3 -p 9200:9200 elasticsearch:2 
+docker service create --name search --replicas 3 -p 9200:9200 elasticsearch:2
 # Crear un servicio llamado search con 3 replicas con el puerto 9200 de la imagen elasticsearch:2
 ```
 
-## Caracteristicas basicas de Swarm y como usarlas en tu flujo de trabajo.
+## Caracteristicas basicas de Swarm y como usarlas en tu flujo de trabajo
 
 ### Docker swarm complete app
 
 ```bash
 docker network create --driver overlay backend
 docker network create --driver overlay frontend
-# Crear dos redes overlay backend y frontend 
+# Crear dos redes overlay backend y frontend
 
 docker service create --name vote --network frontend -p 80:80 --replicas 3 dockersamples/examplevotingapp_vote:before
 # Crear un servicio vote con tres replicas unido a la red frontend saliendo por el puerto 80.
