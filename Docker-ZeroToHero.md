@@ -2,11 +2,9 @@
 
 ## By M. C. Alejandro H. Pineda
 
-### From CIINN - Centro de Innovacion Acelerada A. C. and Coders Link
-
 ## Docker Setup
 
-### Links para instalacion 
+### Links para instalacion
 
 [Instrucciones Generales](https://docs.docker.com/install/)
 
